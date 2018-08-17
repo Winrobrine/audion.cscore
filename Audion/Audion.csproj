@@ -54,6 +54,7 @@
     <Compile Include="Device.cs" />
     <Compile Include="DeviceType.cs" />
     <Compile Include="Extensions\TimeSpanExtensions.cs" />
+    <Compile Include="PlaybackState.cs" />
     <Compile Include="RecordingState.cs" />
     <Compile Include="SourceEventArgs.cs" />
     <Compile Include="SourceEventType.cs" />

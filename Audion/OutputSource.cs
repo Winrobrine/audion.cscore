@@ -1,6 +1,5 @@
 ﻿using CSCore;
 using CSCore.DSP;
-using CSCore.SoundOut;
 using CSCore.Streams;
 using System;
 using System.Threading;
@@ -14,7 +13,7 @@ namespace Audion
         private Uri _uri;
         private IWaveSource _waveSource;
         private ISampleSource _sampleSource;
-        private ISoundOut _soundOut;
+        private CSCore.SoundOut.ISoundOut _soundOut;
 
         private Timer _sourceTimer;
         private TimeSpan cachedPosition = TimeSpan.Zero;
@@ -101,7 +100,7 @@ namespace Audion
 
         public PlaybackState PlaybackState
         {
-            get { return _soundOut == null ? PlaybackState.Stopped : _soundOut.PlaybackState; }
+            get { return _soundOut == null ? PlaybackState.Stopped : (PlaybackState)_soundOut.PlaybackState; }
         }
 
         public bool IsStopped

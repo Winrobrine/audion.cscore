@@ -26,20 +26,20 @@ namespace Audion
         {
             using (var mmdeviceEnumerator = new MMDeviceEnumerator())
             {
-                using (var mmdeviceCollection = mmdeviceEnumerator.EnumAudioEndpoints(DataFlow.Render, DeviceState.Active))
+                try
                 {
-                    foreach (var device in mmdeviceCollection)
+                    var device = mmdeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+                    return new Device
                     {
-                        return new Device
-                        {
-                            DeviceId = device.DeviceID,
-                            Name = device.FriendlyName,
-                            ActualDevice = device
-                        };
-                    }
+                        DeviceId = device.DeviceID,
+                        Name = device.FriendlyName,
+                        ActualDevice = device
+                    };
                 }
-
-                return null;
+                catch (CoreAudioAPIException)
+                {
+                    return null;
+                }
             }
         }
 
